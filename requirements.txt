@@ -1,1 +1,4 @@
-fastapi[all]
+fastapi
+uvicorn
+pandas
+scikit-learn==1.2.2
