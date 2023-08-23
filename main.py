@@ -4,6 +4,7 @@ import pickle
 from pydantic import BaseModel
 import pandas as pd
 from sklearn import *
+import json
 
 class lifestyle(BaseModel):
     specific_ailments : int
@@ -33,9 +34,11 @@ async def index():
 
 @app.post('/predict')
 async def prediction(data : lifestyle):
-    cols = ['specific_ailments','food_preference','age','bmi','smoker','living_in','follow_diet','physical_activity','regular_sleeping_hours','alcohol_consumption','social_interaction','taking_supplements','mental_health_management','illness_count_last_year']
-    data_to_give = pd.DataFrame(columns = cols)
-    response = data.model_dump()
+    #cols = ['specific_ailments','food_preference','age','bmi','smoker','living_in','follow_diet','physical_activity','regular_sleeping_hours','alcohol_consumption','social_interaction','taking_supplements','mental_health_management','illness_count_last_year']
+    #data_to_give = pd.DataFrame(columns = cols)
+    response_json = data.json()
+    response = json.loads(response_json)
+    
     specific_ailments = response['specific_ailments']
     food_preference = response['food_preference']
     age = response['age']
